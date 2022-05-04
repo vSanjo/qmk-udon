@@ -1,0 +1,11 @@
+*
+!.git*
+
+!keyboards/
+keyboards/*
+
+!keyboards/themadnoodle/
+keyboards/themadnoodle/*
+
+!keyboards/themadnoodle/udon13/
+!keyboards/themadnoodle/udon13/**/*
