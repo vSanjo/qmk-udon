@@ -1,31 +1,58 @@
 #include QMK_KEYBOARD_H
 
 enum layers {
-    _DEFAULT,
-    _TTVAPP,
-    _VSCODE,
-    _RGB,
+
+    // Layer Ideas:
+    // 
+    // - Layers:           select a macro layer.
+    // - Layers_Default:   copy, cut, paste, screenshots, etc.
+    // - Layers_NumberPad: simple number pad, etc.
+    // - Layers_Machine:   shutdown, sleep, lock, etc.
+    // - Layers_Discord:   mute self, mute others, change audio, channels, etc.
+    // - Layers_VSCode:    snippets, tools, etc.
+    // 
+    // - Game:             select a game layer.
+    // - Game_MapleStory:  skills, potions, etc.
+    // - Game_PSO2:        skill, potions, etc.
+    // 
+    // - Settings:         select a setting layer.
+    // - Settings_RGB:     change RGB settings/modes, etc.
+    // - Settings_OLED:    change OLED settings, etc.
+
     _LAYERS,
+    _LAYERS_DEFAULT,
+    _LAYERS_NUMPAD,
+    _LAYERS_MACHINE,
+    _LAYERS_DISCORD,
+    _LAYERS_VSCODE,
+
+    _GAME,
+    _GAME_MAPLESTORY,
+    _GAME_PSO2,
+
     _SETTINGS,
+    _SETTINGS_RGB,
+    _SETTINGS_OLED,
+    
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    [_DEFAULT] = LAYOUT_ortho_3x4(
+    [_LAYER_DEFAULT] = LAYOUT_ortho_3x4(
         KC_NO, 
         KC_NO, KC_NO, KC_NO, KC_NO, 
         KC_NO, KC_NO, KC_NO, MO(_LAYERS), 
         KC_NO, KC_NO, KC_NO, MO(_SETTINGS)
     ),
 
-    [_TTVAPP] = LAYOUT_ortho_3x4(
+    [_LAYER_DISCORD] = LAYOUT_ortho_3x4(
         KC_NO,
         KC_NO, KC_NO, KC_NO, KC_NO,
         KC_NO, KC_NO, KC_NO, MO(_LAYERS),
         KC_NO, KC_NO, KC_NO, MO(_SETTINGS)
     ),
 
-    [_VSCODE] = LAYOUT_ortho_3x4(
+    [_LAYER_VSCODE] = LAYOUT_ortho_3x4(
         KC_NO,
         KC_NO, KC_NO, KC_NO, KC_NO,
         KC_NO, KC_NO, KC_NO, MO(_LAYERS),
@@ -34,23 +61,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_LAYERS] = LAYOUT_ortho_3x4(
         KC_NO,
-        TO(_DEFAULT), KC_NO,       KC_NO, KC_NO,
-        TO(_TTVAPP),  TO(_VSCODE), KC_NO, MO(_LAYERS),
+        TO(_LAYER_DEFAULT), KC_NO,       KC_NO, KC_NO,
+        TO(_LAYER_DISCORD),  TO(_LAYER_VSCODE), KC_NO, MO(_LAYERS),
         KC_NO,        KC_NO,       KC_NO, MO(_SETTINGS)
     ),
 
-    [_RGB] = LAYOUT_ortho_3x4(
+    [_SETTINGS_RGB] = LAYOUT_ortho_3x4(
         RGB_TOG,
         RGB_MOD,        RGB_HUI,          RGB_VAI,        RGB_SAI,
         RGB_RMOD,       RGB_HUD,          RGB_VAD,        RGB_SAD,
-        RGB_MODE_PLAIN, RGB_MODE_TWINKLE, RGB_MODE_SWIRL, TO(_DEFAULT)
+        RGB_MODE_PLAIN, RGB_MODE_TWINKLE, RGB_MODE_SWIRL, TO(_LAYER_DEFAULT)
     ),
 
     [_SETTINGS] = LAYOUT_ortho_3x4(
         KC_NO,
-        TO(_RGB), KC_NO, KC_NO, KC_NO,
+        TO(_SETTINGS_RGB), KC_NO, KC_NO, KC_NO,
         KC_NO,    KC_NO, KC_NO, KC_NO,
-        KC_NO,    KC_NO, KC_NO, TO(_DEFAULT)
+        KC_NO,    KC_NO, KC_NO, TO(_LAYER_DEFAULT)
     ),
 };
 
@@ -95,26 +122,44 @@ bool oled_task_user(void) {
     oled_write_P(PSTR("Layer: "), false);
 
     switch (get_highest_layer(layer_state)) {
-        case _DEFAULT:
-            oled_write_P(PSTR("DEFAULT "), false);
-            break;
-        case _TTVAPP:
-            oled_write_P(PSTR("TWITCH  "), false);
-            break;
-        case _VSCODE:
-            oled_write_P(PSTR("VSCODE  "), false);
-            break;
-        case _RGB:
-            oled_write_P(PSTR("RGB     "), false);
-            break;
         case _LAYERS:
             oled_write_P(PSTR("LAYERS  "), false);
             break;
+        case _LAYER_DEFAULT:
+            oled_write_P(PSTR("DEFAULT "), false);
+            break;
+        case _LAYER_NUMPAD:
+            oled_write_P(PSTR("NUMPAD    "), false);
+            break;
+        case _LAYER_MACHINE:
+            oled_write_P(PSTR("MACHINE   "), false);
+            break;
+        case _LAYER_DISCORD:
+            oled_write_P(PSTR("DISCORD   "), false);
+            break;
+        case _LAYER_VSCODE:
+            oled_write_P(PSTR("VSCODE    "), false);
+            break;
+        case _GAME:
+            oled_write_P(PSTR("GAME      "), false);
+            break;
+        case _GAME_MAPLESTORY:
+            oled_write_P(PSTR("MAPLESTORY"), false);
+            break;
+        case _GAME_PSO2:
+            oled_write_P(PSTR("PSO2      "), false);
+            break;
         case _SETTINGS:
-            oled_write_P(PSTR("SETTINGS"), false);
+            oled_write_P(PSTR("SETTINGS  "), false);
+            break;
+        case _SETTINGS_RGB:
+            oled_write_P(PSTR("RGB       "), false);
+            break;
+        case _SETTINGS_OLED:
+            oled_write_P(PSTR("RGB       "), false);
             break;
         default:
-            oled_write_P(PSTR("N/A     "), false);
+            oled_write_P(PSTR("N/A       "), false);
             break;
     }
     return false;
