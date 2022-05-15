@@ -37,35 +37,55 @@ enum layers {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    [_LAYERS] = LAYOUT_ortho_3x4(
+        KC_NO,
+        TO(_LAYER_DEFAULT), KC_NO,              KC_NO, KC_NO,
+        TO(_LAYER_DISCORD), TO(_LAYER_VSCODE),  KC_NO, MO(_LAYERS),
+        KC_NO,              KC_NO,              KC_NO, MO(_SETTINGS)
+    ),
 
-    [_LAYER_DEFAULT] = LAYOUT_ortho_3x4(
+    [_LAYERS_DEFAULT] = LAYOUT_ortho_3x4(
         KC_NO, 
         KC_NO, KC_NO, KC_NO, KC_NO, 
         KC_NO, KC_NO, KC_NO, MO(_LAYERS), 
         KC_NO, KC_NO, KC_NO, MO(_SETTINGS)
     ),
-
-    [_LAYER_DISCORD] = LAYOUT_ortho_3x4(
+    
+    [_LAYERS_NUMPAD] = LAYOUT_ortho_3x4(
+        KC_NO,
+        KC_NO, KC_NO, KC_NO, KC_NO,
+        KC_NO, KC_NO, KC_NO, MO(_LAYERS),
+        KC_NO, KC_NO, KC_NO, MO(_SETTINGS)
+    ),
+    
+    [_LAYERS_MACHINE] = LAYOUT_ortho_3x4(
+        KC_NO,
+        KC_NO, KC_NO, KC_NO, KC_NO,
+        KC_NO, KC_NO, KC_NO, MO(_LAYERS),
+        KC_NO, KC_NO, KC_NO, MO(_SETTINGS)
+    ),
+    
+    [_LAYERS_DISCORD] = LAYOUT_ortho_3x4(
         KC_NO,
         KC_NO, KC_NO, KC_NO, KC_NO,
         KC_NO, KC_NO, KC_NO, MO(_LAYERS),
         KC_NO, KC_NO, KC_NO, MO(_SETTINGS)
     ),
 
-    [_LAYER_VSCODE] = LAYOUT_ortho_3x4(
+    [_LAYERS_VSCODE] = LAYOUT_ortho_3x4(
         KC_NO,
         KC_NO, KC_NO, KC_NO, KC_NO,
         KC_NO, KC_NO, KC_NO, MO(_LAYERS),
         KC_NO, KC_NO, KC_NO, MO(_SETTINGS)
     ),
 
-    [_LAYERS] = LAYOUT_ortho_3x4(
+    [_SETTINGS] = LAYOUT_ortho_3x4(
         KC_NO,
-        TO(_LAYER_DEFAULT), KC_NO,       KC_NO, KC_NO,
-        TO(_LAYER_DISCORD),  TO(_LAYER_VSCODE), KC_NO, MO(_LAYERS),
-        KC_NO,        KC_NO,       KC_NO, MO(_SETTINGS)
+        TO(_SETTINGS_RGB),  KC_NO, KC_NO, KC_NO,
+        KC_NO,              KC_NO, KC_NO, KC_NO,
+        KC_NO,              KC_NO, KC_NO, TO(_LAYER_DEFAULT)
     ),
-
+    
     [_SETTINGS_RGB] = LAYOUT_ortho_3x4(
         RGB_TOG,
         RGB_MOD,        RGB_HUI,          RGB_VAI,        RGB_SAI,
@@ -73,11 +93,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         RGB_MODE_PLAIN, RGB_MODE_TWINKLE, RGB_MODE_SWIRL, TO(_LAYER_DEFAULT)
     ),
 
-    [_SETTINGS] = LAYOUT_ortho_3x4(
+    [_SETTINGS_OLED] = LAYOUT_ortho_3x4(
         KC_NO,
-        TO(_SETTINGS_RGB), KC_NO, KC_NO, KC_NO,
-        KC_NO,    KC_NO, KC_NO, KC_NO,
-        KC_NO,    KC_NO, KC_NO, TO(_LAYER_DEFAULT)
+        KC_NO, KC_NO, KC_NO, KC_NO,
+        KC_NO, KC_NO, KC_NO, MO(_LAYERS),
+        KC_NO, KC_NO, KC_NO, MO(_SETTINGS)
+    ),
+
+    [_GAME] = LAYOUT_ortho_3x4(
+        KC_NO,
+        TO(_SETTINGS_RGB),  KC_NO, KC_NO, KC_NO,
+        KC_NO,              KC_NO, KC_NO, KC_NO,
+        KC_NO,              KC_NO, KC_NO, TO(_LAYER_DEFAULT)
+    ),
+
+    [_GAME_MAPLESTORY] = LAYOUT_ortho_3x4(
+        KC_NO,
+        KC_INSERT, KC_HOME, KC_PGUP, KC_NO,
+        KC_DELETE, KC_END, KC_PGDN, MO(_LAYERS),
+        KC_LCTL, KC_LSFT, KC_TILD, MO(_SETTINGS)
+    ),
+
+    [_GAME_PSO2] = LAYOUT_ortho_3x4(
+        KC_NO,
+        KC_NO, KC_NO, KC_NO, KC_NO,
+        KC_NO, KC_NO, KC_NO, MO(_LAYERS),
+        KC_NO, KC_NO, KC_NO, MO(_SETTINGS)
     ),
 };
 
